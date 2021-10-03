@@ -1,0 +1,60 @@
+<div class="content">
+  <div class="parent">
+    <div class="row">
+      <mat-paginator
+      (page)="handlePageEvent($event)"
+      [length]="length"
+      [pageSize]="pageSize"
+      [showFirstLastButtons]="showFirstLastButtons"
+      [pageSizeOptions]="pageSizeOptions"
+      [pageIndex]="pageIndex"
+      aria-label="Select page">
+    </mat-paginator>
+    </div>
+
+    <div class="input-group flex-nowrap mb-4">
+      <span class="input-group-text" id="addon-wrapping">Filter your pokemon by</span>
+      <input 
+      type="text" 
+      class="form-control" 
+      placeholder="Name" 
+      aria-label="Username" 
+      aria-describedby="addon-wrapping"
+      [(ngModel)]="pokemonName"
+      >
+    </div>
+    
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      <div class="col" *ngFor="let pokemonDetail of pokemonListData | keyvalue | pokemonFilter: pokemonName">
+        <div class="card">
+          <img [src]="domSanitizer.bypassSecurityTrustUrl(pokemonDetail.value.sprites.other['official-artwork']['front_default'])"
+           class="card-img-top text-center" alt="{{pokemonDetail.value.name}}" width="250" height="400">
+          <div class="card-body text-center">
+            <h5 class="card-title">NAME: {{pokemonDetail.value.name}}</h5>
+            <div class="card-text">
+              <b>HEIGHT: {{pokemonDetail.value.height}}</b>
+            </div>
+            <div class="card-text">
+              <b>WEIGHT: {{pokemonDetail.value.weight}}</b>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="row">
+      <mat-paginator
+      (page)="handlePageEvent($event)"
+      [length]="length"
+      [pageSize]="pageSize"
+      [showFirstLastButtons]="showFirstLastButtons"
+      [pageSizeOptions]="pageSizeOptions"
+      [pageIndex]="pageIndex"
+      aria-label="Select page">
+    </mat-paginator>
+    </div>
+  </div>
+</div>
+
+
